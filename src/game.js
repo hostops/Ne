@@ -1,7 +1,8 @@
 const Way = Object.freeze({
     UP:	0,
-    DOWN: 1,
-    LEFT_RIGHT: 2
+    RIGHT: 1,
+    DOWN: 2,
+	LEFT: 3
 });
 
 class Game {
