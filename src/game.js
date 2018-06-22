@@ -1,3 +1,9 @@
+const Way = Object.freeze({
+    UP:	0,
+    DOWN: 1,
+    LEFT_RIGHT: 2
+});
+
 class Game {
 	constructor(container) {
 		this.canvas = document.createElement("canvas");

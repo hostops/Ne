@@ -1,5 +1,5 @@
 class Room {
-	constructor(container) {
+	constructor() {
 		this.items = [];
 	}
 	addItem(item) {
