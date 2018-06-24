@@ -34,6 +34,7 @@ class Game {
 		this.canvas = document.createElement("canvas");
 		container.appendChild(this.canvas);
 		// Canvas Parameters
+		this.context = this.canvas.getContext("2d");
 		this.canvas.style.width = "90vw"
 		this.canvas.style.height = "60vh";
 		this.tileSize = 10;
@@ -56,10 +57,7 @@ class Game {
 	 * Function is called on animation frame.
 	 */
 	update() {
-		this.currentRoom.items.forEach(function(item) {
-			item.update(this.currentRoom);
-			item.draw(this.canvas.getContext("2d"), this.tileSize, this.width, this.height);
-		}.bind(this));
+		this.currentRoom.draw(this.context, this.width, this.height);
 		window.requestAnimationFrame(this.update.bind(this));
 	}
 }
