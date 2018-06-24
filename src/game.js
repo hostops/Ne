@@ -31,17 +31,31 @@ class Game {
 	 * @param {Object} container Dom object where canvas should be placed. 
 	 */
 	constructor(container) {
+		this.container = container;
 		this.canvas = document.createElement("canvas");
 		container.appendChild(this.canvas);
-		// Canvas Parameters
-		this.canvas.style.width = "90vw"
-		this.canvas.style.height = "60vh";
-		this.tileSize = 10;
-		this.width = 5;
-		this.height = 5;
+
+		// Resize canvas to fit inside container
+		this.resizeCanvas();
+
+		// If the container is resized, resize canvas accordingly
+		this.container.onresize = function() {
+			this.resizeCanvas();
+		}.bind(this);
+
 		// Add main room
-		this.currentRoom = new Room(10, 10);
+		this.currentRoom = new Room(100, 100);
 	}
+
+	/**
+	 * Resize canvas to fit inside this.container
+	 */
+	resizeCanvas() {
+		var containerSize = this.container.getBoundingClientRect();
+		this.canvas.width = containerSize.width;
+		this.canvas.height = containerSize.height;
+	}
+
 	/**
 	 * Change current room. This function is called when user leaves current room. 
 	 *
