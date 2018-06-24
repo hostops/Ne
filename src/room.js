@@ -3,14 +3,8 @@
  * and is place where user can do all of his work (fight monsters, collect items, ...).
  * User can leave room with entering anotherone. 
  * 
-<<<<<<< HEAD
- * @property {number} width  Width of room in percents.
- * @property {number} height Height of room in percents.
- * @property {Item[]} items  Array of items in room.
-=======
  * @property {number} size		Size of room in percents of container size.
  * @property {Item[]} items		Array of items in room.
->>>>>>> 56e5f55d0c7216977c7203ed4905b48f7ca8e396
  * @since 1.0.0
  */
 class Room {
