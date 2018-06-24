@@ -33,6 +33,7 @@ class Game {
 		this.container = container;
 		this.canvas = document.createElement("canvas");
 		container.appendChild(this.canvas);
+		this.context = this.canvas.getContext("2d");
 
 		// Resize canvas to fit inside container
 		this.resizeCanvas();
@@ -43,7 +44,7 @@ class Game {
 		}.bind(this);
 
 		// Add main room
-		this.currentRoom = new Room(100, 100);
+		this.currentRoom = new Room(50);
 	}
 
 	/**
@@ -69,7 +70,7 @@ class Game {
 	 * Function is called on animation frame.
 	 */
 	update() {
-		this.currentRoom.draw(this.context, this.width, this.height);
+		this.currentRoom.draw(this.context, this.canvas.width, this.canvas.height);
 		window.requestAnimationFrame(this.update.bind(this));
 	}
 }
