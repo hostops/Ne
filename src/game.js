@@ -18,7 +18,6 @@ const Direction = Object.freeze({
  *
  * @property {number} width       Width of canvas in tiles.
  * @property {number} height      Height of canvas in tiles.
- * @property {number} tileSize    Size of tile in pixels.
  * @property {Room}   currentRoom Object of current displayed room.
  * @property {Object} canvas      Canvas where game is drawn.
  * @since 1.0.0
@@ -37,7 +36,6 @@ class Game {
 		this.context = this.canvas.getContext("2d");
 		this.canvas.style.width = "90vw"
 		this.canvas.style.height = "60vh";
-		this.tileSize = 10;
 		this.width = 5;
 		this.height = 5;
 		// Add main room
