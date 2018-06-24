@@ -3,25 +3,27 @@
  * @enum {number}
  */
 const Moving = Object.freeze({
+	/** Moving is changed by user request */
+	FREE: 0,
 	/** Random direction. */
-	RANDOM:	0,
+	RANDOM:	1,
 	/** Moving in vertical direction */
-	VERTICAL: 1,
+	VERTICAL: 2,
 	/** Moving from in horizontal direction. */
-	HORIZONTAL: 2,
+	HORIZONTAL: 3,
 	/** Following the user. */
-	FOLLOWING: 3,
+	FOLLOWING: 4,
 	/** Hiding from user, to be hard to catch. */
-	HIDING: 4
+	HIDING: 5
 });
 
 /**
  * Interface for items that are placed in room. 
  *
- * @property {number} width  Width of item in tiles.
- * @property {number} height Height of item in tiles.
- * @property {number} x      X coordinate of item in tiles.
- * @property {number} y      Y coordinate of item in tiles.
+ * @property {number} width  Width of item in percents.
+ * @property {number} height Height of item in percents.
+ * @property {number} x      X coordinate of item in percents.
+ * @property {number} y      Y coordinate of item in percents.
  * @property {Moving} moving Moving type of item.
  * @since 1.0.0
  */
@@ -30,8 +32,8 @@ class Item {
 	/**
 	 * Constructor of class Item
 	 *
-	 * @param {number} width  Width of item in tiles.
-	 * @param {number} height Height of item in tiles. 
+	 * @param {number} width  Width of item in percents.
+	 * @param {number} height Height of item in percents. 
 	 */
 	constructor(width, height) {
 		this.moving = Moving.RANDOM;
@@ -65,8 +67,8 @@ class Item {
 	 * Draws object on canvas.
 	 * 
 	 * @param {Object} context  2D context of Canvas
-	 * @param {number} width    Width of canvas in tiles
-	 * @param {number} height   Height of canvas in tiles
+	 * @param {number} width    Width of canvas in percents
+	 * @param {number} height   Height of canvas in percents
 	 */
 	draw(context, width, height) {
 		context.beginPath();

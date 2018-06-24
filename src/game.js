@@ -3,21 +3,21 @@
  * @enum {number}
  */
 const Direction = Object.freeze({
-	/** Direction up. */
-	UP:	0,
-	/** Direction right. */
-	RIGHT: 1,
-	/** Direction down. */
-	DOWN: 2,
 	/** Direction left. */
-	LEFT: 3
+	LEFT: 0,
+	/** Direction up. */
+	UP:	1,
+	/** Direction right. */
+	RIGHT: 2,
+	/** Direction down. */
+	DOWN: 3
 });
 
 /**
  * Main game object that controlls user, gameplay, rooms.
  *
- * @property {number} width       Width of canvas in tiles.
- * @property {number} height      Height of canvas in tiles.
+ * @property {number} width       Width of canvas in percents.
+ * @property {number} height      Height of canvas in percents.
  * @property {Room}   currentRoom Object of current displayed room.
  * @property {Object} canvas      Canvas where game is drawn.
  * @since 1.0.0

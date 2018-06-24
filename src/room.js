@@ -3,8 +3,8 @@
  * and is place where user can do all of his work (fight monsters, collect items, ...).
  * User can leave room with entering anotherone. 
  * 
- * @property {number} width  Width of room in tiles.
- * @property {number} height Height of room in tiles.
+ * @property {number} width  Width of room in percents.
+ * @property {number} height Height of room in percents.
  * @property {Item[]} items  Array of items in room.
  * @since 1.0.0
  */
@@ -13,8 +13,8 @@ class Room {
 	/**
 	 * Construction for Room.
 	 *
-	 * @param {number} width  Width of the room in tiles.
-	 * @param {number} height Height of the room in tiles.
+	 * @param {number} width  Width of the room in percents.
+	 * @param {number} height Height of the room in percents.
 	 */
 	constructor(width, height) {
 		this.width = width;
