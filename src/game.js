@@ -18,7 +18,6 @@ const Direction = Object.freeze({
  *
  * @property {number} width       Width of canvas in tiles.
  * @property {number} height      Height of canvas in tiles.
- * @property {number} tileSize    Size of tile in pixels.
  * @property {Room}   currentRoom Object of current displayed room.
  * @property {Object} canvas      Canvas where game is drawn.
  * @since 1.0.0
@@ -70,10 +69,7 @@ class Game {
 	 * Function is called on animation frame.
 	 */
 	update() {
-		this.currentRoom.items.forEach(function(item) {
-			item.update(this.currentRoom);
-			item.draw(this.canvas.getContext("2d"), this.tileSize, this.width, this.height);
-		}.bind(this));
+		this.currentRoom.draw(this.context, this.width, this.height);
 		window.requestAnimationFrame(this.update.bind(this));
 	}
 }

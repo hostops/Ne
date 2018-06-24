@@ -18,7 +18,6 @@ const Direction = Object.freeze({
  *
  * @property {number} width       Width of canvas in tiles.
  * @property {number} height      Height of canvas in tiles.
- * @property {number} tileSize    Size of tile in pixels.
  * @property {Room}   currentRoom Object of current displayed room.
  * @property {Object} canvas      Canvas where game is drawn.
  * @since 1.0.0
@@ -34,6 +33,7 @@ class Game {
 		this.container = container;
 		this.canvas = document.createElement("canvas");
 		container.appendChild(this.canvas);
+<<<<<<< HEAD
 
 		// Resize canvas to fit inside container
 		this.resizeCanvas();
@@ -43,6 +43,14 @@ class Game {
 			this.resizeCanvas();
 		}.bind(this);
 
+=======
+		// Canvas Parameters
+		this.context = this.canvas.getContext("2d");
+		this.canvas.style.width = "90vw"
+		this.canvas.style.height = "60vh";
+		this.width = 5;
+		this.height = 5;
+>>>>>>> 01ce05a081fe3bc3408afd7d1429845a8c734751
 		// Add main room
 		this.currentRoom = new Room(100, 100);
 	}
@@ -70,10 +78,7 @@ class Game {
 	 * Function is called on animation frame.
 	 */
 	update() {
-		this.currentRoom.items.forEach(function(item) {
-			item.update(this.currentRoom);
-			item.draw(this.canvas.getContext("2d"), this.tileSize, this.width, this.height);
-		}.bind(this));
+		this.currentRoom.draw(this.context, this.width, this.height);
 		window.requestAnimationFrame(this.update.bind(this));
 	}
 }/**
@@ -143,11 +148,10 @@ class Item {
 	 * Draws object on canvas.
 	 * 
 	 * @param {Object} context  2D context of Canvas
-	 * @param {number} tileSize Size of tile in pixels
 	 * @param {number} width    Width of canvas in tiles
 	 * @param {number} height   Height of canvas in tiles
 	 */
-	draw(context, tileSize, width, height) {
+	draw(context, width, height) {
 		context.beginPath();
 		context.arc(this.x, this.y, this.width, Math.PI * 1 / 4, Math.PI * 7 / 4);
 		context.fill();

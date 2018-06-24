@@ -65,11 +65,10 @@ class Item {
 	 * Draws object on canvas.
 	 * 
 	 * @param {Object} context  2D context of Canvas
-	 * @param {number} tileSize Size of tile in pixels
 	 * @param {number} width    Width of canvas in tiles
 	 * @param {number} height   Height of canvas in tiles
 	 */
-	draw(context, tileSize, width, height) {
+	draw(context, width, height) {
 		context.beginPath();
 		context.arc(this.x, this.y, this.width, Math.PI * 1 / 4, Math.PI * 7 / 4);
 		context.fill();
