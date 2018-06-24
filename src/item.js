@@ -66,9 +66,8 @@ class Item {
 	/**
 	 * Draws object on canvas.
 	 * 
-	 * @param {Object} context  2D context of Canvas
-	 * @param {number} width    Width of canvas in percents
-	 * @param {number} height   Height of canvas in percents
+	 * @param {Object} context	2D context of Canvas
+	 * @param {number} size		Size of canvas in pixels
 	 */
 	draw(context, size) {
 		context.beginPath();

@@ -80,14 +80,14 @@ class Player extends Item {
         this.y = this.tempY > 0 && this.tempY + this.height < 1? this.tempY : this.Y;
 	}
 	
+	
 	/**
 	 * Draws object on canvas.
 	 * 
-	 * @param {Object} context  2D context of Canvas
-	 * @param {number} width    Width of canvas in percents
-	 * @param {number} height   Height of canvas in percents
+	 * @param {Object} context	2D context of Canvas
+	 * @param {number} size		Size of canvas in pixels
 	 */
-	draw(context, width, height) {
+	draw(context, size) {
         context.fillStyle = "#000";
         context.beginPath();
 		context.arc(this.x * size, this.y * size, this.width * size, 0, Math.PI * 2);
