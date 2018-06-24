@@ -35,17 +35,18 @@ class Item {
 		
 	}
 	draw(context, tileSize, width, height) {
-
+		context.beginPath();
+		context.arc(this.x, this.y, this.width, Math.PI * 1 / 4, Math.PI * 7 / 4)
 	}
 }class Items {
 	static angryRobot() {
-		
+		return new AngryRobot();
 	}
 	static helper() {
-		
+		return new Helper();
 	}
 	static bonus() {
-		
+		return new Bonus();
 	}
 }var mainRoom;
 var mainGame;
