@@ -3,9 +3,14 @@
  * and is place where user can do all of his work (fight monsters, collect items, ...).
  * User can leave room with entering anotherone. 
  * 
+<<<<<<< HEAD
  * @property {number} width  Width of room in percents.
  * @property {number} height Height of room in percents.
  * @property {Item[]} items  Array of items in room.
+=======
+ * @property {number} size		Size of room in percents of container size.
+ * @property {Item[]} items		Array of items in room.
+>>>>>>> 56e5f55d0c7216977c7203ed4905b48f7ca8e396
  * @since 1.0.0
  */
 class Room {
@@ -39,7 +44,7 @@ class Room {
 	 */
 	draw(context, width, height) {
 		// Calculate room width
-		var roomSize = Math.min(width, height) * this.size / 100;
+		var roomSize = Math.min(width, height) * this.size;
 		
 		var left = (width - roomSize) / 2;
 		var top = (height - roomSize) / 2;
@@ -48,8 +53,16 @@ class Room {
 		context.lineWidth = 1;
 		context.strokeRect(left, top, roomSize, roomSize);
 
+		// Translate coordinate system, so that 0.0 in in top left corner of room
+		context.translate(left, top);
+
+		// Draw all items in room
 		this.items.forEach(function(item) {
-			// Draw item
+			item.update(this.currentRoom);
+			item.draw(context, roomSize);
 		}.bind(this));
+
+		// Remove translation
+		context.translate(-left, -top);
 	}
 }
