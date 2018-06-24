@@ -48,8 +48,8 @@ class Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	place(room) {
-		this.x = Math.floor((Math.random() * room.width));
-		this.y = Math.floor((Math.random() * room.height));
+		this.x = Math.floor(Math.random());
+		this.y = Math.floor(Math.random());
 	}
 	
 	/**
@@ -68,9 +68,9 @@ class Item {
 	 * @param {number} width    Width of canvas in tiles
 	 * @param {number} height   Height of canvas in tiles
 	 */
-	draw(context, width, height) {
+	draw(context, size) {
 		context.beginPath();
-		context.arc(this.x, this.y, this.width, Math.PI * 1 / 4, Math.PI * 7 / 4);
+		context.fillRect(this.x * size, this.y * size, this.width * size, this.height * size)
 		context.fill();
 	}
 }

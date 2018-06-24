@@ -44,7 +44,7 @@ class Game {
 		}.bind(this);
 
 		// Add main room
-		this.currentRoom = new Room(50);
+		this.currentRoom = new Room(0.4);
 	}
 
 	/**
@@ -70,6 +70,7 @@ class Game {
 	 * Function is called on animation frame.
 	 */
 	update() {
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 		this.currentRoom.draw(this.context, this.canvas.width, this.canvas.height);
 		window.requestAnimationFrame(this.update.bind(this));
 	}
