@@ -32,4 +32,8 @@ class Room {
 		this.items.push(item);
 		item.place(this);
 	}
+
+	draw(context, width, height) {
+		
+	}
 }

@@ -4,11 +4,11 @@
  */
 const Moving = Object.freeze({
 	/** Random direction. */
-    RANDOM:	0,
+	RANDOM:	0,
 	/** Moving in vertical direction */
-    VERTICAL: 1,
+	VERTICAL: 1,
 	/** Moving from in horizontal direction. */
-    HORIZONTAL: 2,
+	HORIZONTAL: 2,
 	/** Following the user. */
 	FOLLOWING: 3,
 	/** Hiding from user, to be hard to catch. */

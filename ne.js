@@ -4,11 +4,11 @@
  */
 const Direction = Object.freeze({
 	/** Direction up. */
-    UP:	0,
+	UP:	0,
 	/** Direction right. */
-    RIGHT: 1,
+	RIGHT: 1,
 	/** Direction down. */
-    DOWN: 2,
+	DOWN: 2,
 	/** Direction left. */
 	LEFT: 3
 });
@@ -68,11 +68,11 @@ class Game {
  */
 const Moving = Object.freeze({
 	/** Random direction. */
-    RANDOM:	0,
+	RANDOM:	0,
 	/** Moving in vertical direction */
-    VERTICAL: 1,
+	VERTICAL: 1,
 	/** Moving from in horizontal direction. */
-    HORIZONTAL: 2,
+	HORIZONTAL: 2,
 	/** Following the user. */
 	FOLLOWING: 3,
 	/** Hiding from user, to be hard to catch. */
@@ -189,8 +189,8 @@ var mainRoom;
  * Creates new game in body of document.
  */
 document.addEventListener("DOMContentLoaded", function() { 
-    mainGame = new Game(document.body);
-    mainRoom = mainGame.currentRoom;
+	mainGame = new Game(document.body);
+	mainRoom = mainGame.currentRoom;
 	window.requestAnimationFrame(mainGame.update.bind(mainGame));
 	start();
 }, false);/**
@@ -226,5 +226,9 @@ class Room {
 	addItem(item) {
 		this.items.push(item);
 		item.place(this);
+	}
+
+	draw(context, width, height) {
+		
 	}
 }

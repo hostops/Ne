@@ -4,11 +4,11 @@
  */
 const Direction = Object.freeze({
 	/** Direction up. */
-    UP:	0,
+	UP:	0,
 	/** Direction right. */
-    RIGHT: 1,
+	RIGHT: 1,
 	/** Direction down. */
-    DOWN: 2,
+	DOWN: 2,
 	/** Direction left. */
 	LEFT: 3
 });
