@@ -13,12 +13,10 @@ class Room {
 	/**
 	 * Construction for Room.
 	 *
-	 * @param {number} width  Width of the room in percents.
-	 * @param {number} height Height of the room in percents.
+	 * @param {number} size	Size of room in percents.
 	 */
-	constructor(width, height) {
-		this.width = width;
-		this.height = height;
+	constructor(size) {
+		this.size = size;
 		this.items = [];
 		this.rooms = [];
 	}
@@ -33,7 +31,25 @@ class Room {
 		item.place(this);
 	}
 
+	/**
+	 * Draws room and all objects in the room.
+	 * @param {context} context	Canvas context to draw on
+	 * @param {number} width	Width of the canvas in pixels
+	 * @param {number} height	Height of the canvas in pixels
+	 */
 	draw(context, width, height) {
+		// Calculate room width
+		var roomSize = Math.min(width, height) * this.size / 100;
 		
+		var left = (width - roomSize) / 2;
+		var top = (height - roomSize) / 2;
+
+		// Draw room border
+		context.lineWidth = 1;
+		context.strokeRect(left, top, roomSize, roomSize);
+
+		this.items.forEach(function(item) {
+			// Draw item
+		}.bind(this));
 	}
 }
