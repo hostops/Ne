@@ -35,7 +35,7 @@ class Item {
 	 */
 	constructor(width, height) {
 		this.moving = Moving.RANDOM;
-		this.widht = widht;
+		this.width = width;
 		this.height = height;
 		this.x = 0;
 		this.y = 0;
@@ -66,11 +66,12 @@ class Item {
 	 * 
 	 * @param {Object} context  2D context of Canvas
 	 * @param {number} tileSize Size of tile in pixels
-	 * @param {number} widht    Width of canvas in tiles
+	 * @param {number} width    Width of canvas in tiles
 	 * @param {number} height   Height of canvas in tiles
 	 */
 	draw(context, tileSize, width, height) {
 		context.beginPath();
-		context.arc(this.x, this.y, this.width, Math.PI * 1 / 4, Math.PI * 7 / 4)
+		context.arc(this.x, this.y, this.width, Math.PI * 1 / 4, Math.PI * 7 / 4);
+		context.fill();
 	}
 }

@@ -13,13 +13,14 @@ class Room {
 	/**
 	 * Construction for Room.
 	 *
-	 * @param {number} widht  Width of the room in tiles.
+	 * @param {number} width  Width of the room in tiles.
 	 * @param {number} height Height of the room in tiles.
 	 */
 	constructor(width, height) {
 		this.width = width;
 		this.height = height;
 		this.items = [];
+		this.rooms = [];
 	}
 	
 	/**

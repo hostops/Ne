@@ -40,8 +40,7 @@ class Game {
 		this.width = 5;
 		this.height = 5;
 		// Add main room
-		this.currentRoom = new Room();
-		this.addItem(this.currentRoom);
+		this.currentRoom = new Room(10, 10);
 	}
 	/**
 	 * Change current room. This function is called when user leaves current room. 
@@ -57,10 +56,10 @@ class Game {
 	 * Function is called on animation frame.
 	 */
 	update() {
-		this.currentRoom.rooms.foreach(function(room) {
-			room.update(this.currentRoom);
-			room.draw(this.canvas.getContext("2d"), this.tileSize, this.width, this.height);
-		});
-		window.requestAnimationFrame(this.update);
+		this.currentRoom.items.forEach(function(item) {
+			item.update(this.currentRoom);
+			item.draw(this.canvas.getContext("2d"), this.tileSize, this.width, this.height);
+		}.bind(this));
+		window.requestAnimationFrame(this.update.bind(this));
 	}
 }

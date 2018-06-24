@@ -19,5 +19,6 @@ var mainRoom;
 document.addEventListener("DOMContentLoaded", function() { 
     mainGame = new Game(document.body);
     mainRoom = mainGame.currentRoom;
-	window.requestAnimationFrame(mainGame.update);
+	window.requestAnimationFrame(mainGame.update.bind(mainGame));
+	start();
 }, false);
