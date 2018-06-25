@@ -12,7 +12,25 @@ const Direction = Object.freeze({
 	/** Direction right. */
 	RIGHT: 3,
 	/** Direction down. */
-	DOWN: 4
+	DOWN: 4,
+
+	/**
+	 * Get inverse direction of given direction
+	 *
+	 * @param {Direction} direction	Direction you want to find an inverse to 
+	 */
+	inverse: function(direction) {
+		return (direction == Direction.NOWHERE) ? Direction.NOWHERE : (direction + 2) % 4;
+	}
+});
+
+const Door = Object.freeze({
+	/** Length of doors in percents */
+	LENGTH: 0.1,
+	/** Thickness of doors in percents */
+	THICKNESS: 0.01,
+	/** Maximum number of doors that can be placed in one room */
+	MAX_NUMBER: 4
 });
 
 /**

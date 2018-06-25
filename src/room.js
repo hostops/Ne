@@ -17,7 +17,9 @@ class Room {
 	constructor(size) {
 		this.size = size;
 		this.items = [];
-		this.rooms = [];
+
+		// Create array for each direction
+		this.rooms = {};
 	}
 	
 	/**
@@ -28,6 +30,71 @@ class Room {
 	addItem(item) {
 		this.items.push(item);
 		item.place(this);
+	}
+
+	/**
+	 * Connects this room with another room in specified direction.
+	 * The room is placed in this.rooms object
+	 * @param {Room} room				The room we want to connect to this room.
+	 * @param {Direction} direction		The direction where we want to place the room.
+	 * @param {function} checkFunction	Function that checks if player can move in room.
+	 */
+	addRoom(room, direction, checkFunction) {
+		// If the rooms are already connected, exit the loop
+		var inverseDirection = Direction.inverse(direction);
+		if (inverseDirection in room.rooms && room.rooms[inverseDirection].indexOf(this) != -1) {
+			return;
+		}
+
+		// If the direction is not already in this.rooms, insert new empty array
+		if (!(direction in this.rooms)) {
+			this.rooms[direction] = [];
+		}
+
+		if (this.rooms[direction].length >= Door.MAX_NUMBER) {
+			Logger.error("Too many doors in direction", direction);
+		}
+
+		// Add room to array and add link to this room to other room too
+		this.rooms[direction].push(room);
+		room.addRoom(this, inverseDirection);
+	}
+
+	/**
+	 * Draws doors to other rooms specified in this.rooms
+	 * @param {context} context	Canvas context to draw on
+	 * @param {number} size		Size of canvas in pixels
+	 */
+	drawDoors(context, size) {
+		// Draw doors
+		var directions = Object.keys(this.rooms);
+		directions.forEach(function(direction) {
+			
+			var doors = this.rooms[direction];
+			var segmentLength = size / doors.length;
+
+			var doorLength = Door.LENGTH * size;
+			var doorThickness = Door.THICKNESS * size;
+
+			for (var i = 0; i < doors.length; i++) {
+				var centerOfSegment = (i * segmentLength) + (segmentLength / 2);
+
+				var x, y, doorWidth, doorHeight;
+				if (direction == Direction.UP || direction == Direction.DOWN) {
+					x = centerOfSegment - doorLength / 2;
+					y = (direction == Direction.DOWN) * (size - doorThickness);
+					doorWidth = doorLength;
+					doorHeight = doorThickness;
+				} else {
+					x = (direction == Direction.RIGHT) * (size - doorThickness);
+					y = centerOfSegment - doorLength / 2;
+					doorWidth = doorThickness;
+					doorHeight = doorLength;
+				}
+
+				context.fillRect(x, y, doorWidth, doorHeight);
+			}
+		}.bind(this));
 	}
 
 	/**
@@ -49,6 +116,9 @@ class Room {
 
 		// Translate coordinate system, so that 0.0 in in top left corner of room
 		context.translate(left, top);
+
+		// Draw doors to other connected rooms
+		this.drawDoors(context, roomSize);
 
 		// Draw all items in room
 		this.items.forEach(function(item) {
