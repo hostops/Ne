@@ -4,15 +4,15 @@
  */
 const Direction = Object.freeze({
 	/** The entity is not moving */
-	NOWHERE: -1,
+	NOWHERE: 0,
 	/** Direction left. */
-	LEFT: 0,
+	LEFT: 1,
 	/** Direction up. */
-	UP:	1,
+	UP:	2,
 	/** Direction right. */
-	RIGHT: 2,
+	RIGHT: 3,
 	/** Direction down. */
-	DOWN: 3
+	DOWN: 4
 });
 
 /**

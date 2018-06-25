@@ -1,5 +1,5 @@
 /**
- * Interface for items that are placed in room. 
+ * Class for main character. This type of item is moving by user input (keyboard arrows).
  *
  * @property {number} width  Width of item in percents.
  * @property {number} height Height of item in percents.
@@ -11,15 +11,10 @@
 class Player extends Item {
 	
 	/**
-	 * Constructor of class Item
+	 * Constructor of class Player
 	 *
-	 * @property {number} width     Width of item in percents.
-	 * @property {number} height    Height of item in percents.
-	 * @property {number} x         X coordinate of item in percents.
-	 * @property {number} y         Y coordinate of item in percents.
-	 * @property {number} tempX     Temporary X coordinate of item in percents.
-	 * @property {number} tempY     Temporary Y coordinate of item in percents.
-	 * @property {Moving} moving    Moving type of item.
+	 * @param {number} width  Width of item in percents.
+	 * @param {number} height Height of item in percents. 
 	 */
 	constructor(width, height) {
 		super(width, height);
@@ -35,10 +30,10 @@ class Player extends Item {
 
 	/**
 	 * User action event. Event is fired on keydown.
-	 * @param {Object} e Event.
+	 * @param {Object} event Event.
 	 */
-	startUserAction(e) {
-		switch (e.keyCode) {
+	startUserAction(event) {
+		switch (event.keyCode) {
 			case 37: this.direction = Direction.LEFT; break;
 			case 38: this.direction = Direction.UP; break;
 			case 39: this.direction = Direction.RIGHT; break;
@@ -48,13 +43,13 @@ class Player extends Item {
 
 	/**
 	 * User action event. Event is fired on keyup.
-	 * @param {Object} e Event.
+	 * @param {Object} event Event.
 	 */
-	endUserAction(e) {
-		if (e.keyCode == 37 && this.direction == Direction.LEFT ||
-			e.keyCode == 38 && this.direction == Direction.UP ||
-			e.keyCode == 39 && this.direction == Direction.RIGHT ||
-			e.keyCode == 40 && this.direction == Direction.DOWN) {
+	endUserAction(event) {
+		if (event.keyCode == 37 && this.direction == Direction.LEFT ||
+			event.keyCode == 38 && this.direction == Direction.UP ||
+			event.keyCode == 39 && this.direction == Direction.RIGHT ||
+			event.keyCode == 40 && this.direction == Direction.DOWN) {
 			this.direction = Direction.NOWHERE;
 		}
 	}
