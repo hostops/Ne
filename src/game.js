@@ -3,6 +3,8 @@
  * @enum {number}
  */
 const Direction = Object.freeze({
+	/** The entity is not moving */
+	NOWHERE: -1,
 	/** Direction left. */
 	LEFT: 0,
 	/** Direction up. */

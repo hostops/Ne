@@ -13,48 +13,68 @@ class Player extends Item {
 	/**
 	 * Constructor of class Item
 	 *
-     * @property {number} width     Width of item in percents.
-     * @property {number} height    Height of item in percents.
-     * @property {number} x         X coordinate of item in percents.
-     * @property {number} y         Y coordinate of item in percents.
-     * @property {number} tempX     Temporary X coordinate of item in percents.
-     * @property {number} tempY     Temporary Y coordinate of item in percents.
-     * @property {Moving} moving    Moving type of item.
+	 * @property {number} width     Width of item in percents.
+	 * @property {number} height    Height of item in percents.
+	 * @property {number} x         X coordinate of item in percents.
+	 * @property {number} y         Y coordinate of item in percents.
+	 * @property {number} tempX     Temporary X coordinate of item in percents.
+	 * @property {number} tempY     Temporary Y coordinate of item in percents.
+	 * @property {Moving} moving    Moving type of item.
 	 */
 	constructor(width, height) {
-		this.moving = Moving.RANDOM;
-		this.width = width;
-		this.height = height;
-		this.x = 0;
-        this.y = 0;
-        this.tempX = 0;
-        this.tempY = 0;
-        window.addEventListener("keydown", this.userAction.bind(this));
-	}
-    
-    /**
-     * User action event. Event is fired on keydown.
-     * @param {Object} e Event.
-     */
-    userAction(e){
-        switch (e.keyCode()) {
-            case 37: this.moveUser(Direction.LEFT);
-            case 38: this.moveUser(Direction.UP);
-            case 39: this.moveUser(Direction.RIGHT);
-            case 40: this.moveUser(Direction.DOWN);
-        }
-    }
+		super(width, height);
+		this.moving = Moving.FREE;
 
-    /** 
-     * Moves user in specified direction.
-     * @param {Direction} direction Direction to move to.
-     */
-    moveUser(direction) {
-        this.tempX -= (direction == Direction.LEFT) / 100;
-        this.tempX += (direction == Direction.RIGHT) / 100;
-        this.tempY -= (direction == Direction.DOWN) / 100;
-        this.tempY += (direction == Direction.UP) / 100;
-    }
+		// Direction in which the player is moving
+		this.direction = Direction.NOWHERE;
+
+		// Event listeners for key 
+		window.addEventListener("keydown", this.startUserAction.bind(this));
+		window.addEventListener("keyup", this.endUserAction.bind(this));
+	}
+
+	/**
+	 * User action event. Event is fired on keydown.
+	 * @param {Object} e Event.
+	 */
+	startUserAction(e) {
+		switch (e.keyCode) {
+			case 37: this.direction = Direction.LEFT; break;
+			case 38: this.direction = Direction.UP; break;
+			case 39: this.direction = Direction.RIGHT; break;
+			case 40: this.direction = Direction.DOWN; break;
+		}
+	}
+
+	/**
+	 * User action event. Event is fired on keyup.
+	 * @param {Object} e Event.
+	 */
+	endUserAction(e) {
+		if (e.keyCode == 37 && this.direction == Direction.LEFT ||
+			e.keyCode == 38 && this.direction == Direction.UP ||
+			e.keyCode == 39 && this.direction == Direction.RIGHT ||
+			e.keyCode == 40 && this.direction == Direction.DOWN) {
+			this.direction = Direction.NOWHERE;
+		}
+	}
+
+	/** 
+	 * Moves user in specified direction.
+	 * @param {Direction} direction Direction to move to.
+	 */
+	moveUser(direction) {
+		var dx = this.x;
+		var dy = this.y;
+
+		dx -= (direction == Direction.LEFT) / 100;
+		dx += (direction == Direction.RIGHT) / 100;
+		dy += (direction == Direction.DOWN) / 100;
+		dy -= (direction == Direction.UP) / 100;
+
+		this.x = dx > 0 && dx + this.width < 1 ? dx : this.x;
+		this.y = dy > 0 && dy + this.height < 1 ? dy : this.y;
+	}
 
 	/**
 	 * Places item in room.  It is called when we place
@@ -63,10 +83,8 @@ class Player extends Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	place(room) {
-		this.x = Math.floor((Math.random() * room.width));
-        this.y = Math.floor((Math.random() * room.height));
-        this.tempX = this.x;
-        this.tempY = this.y;
+		this.x = Math.random();
+		this.y = Math.random();
 	}
 	
 	/**
@@ -76,8 +94,7 @@ class Player extends Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	update(room) {
-        this.x = this.tempX > 0 && this.tempX + this.width < 1? this.tempX : this.Y;
-        this.y = this.tempY > 0 && this.tempY + this.height < 1? this.tempY : this.Y;
+		this.moveUser(this.direction);
 	}
 	
 	
@@ -88,9 +105,6 @@ class Player extends Item {
 	 * @param {number} size		Size of canvas in pixels
 	 */
 	draw(context, size) {
-        context.fillStyle = "#000";
-        context.beginPath();
-		context.arc(this.x * size, this.y * size, this.width * size, 0, Math.PI * 2);
-		context.fill();
+		super.draw(context, size);
 	}
 }
