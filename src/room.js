@@ -3,8 +3,9 @@
  * and is place where user can do all of his work (fight monsters, collect items, ...).
  * User can leave room with entering anotherone. 
  * 
- * @property {number} size		Size of room in percents of container size.
- * @property {Item[]} items		Array of items in room.
+ * @property {number} 						size	Size of room in percents of container size.
+ * @property {Item[]} 						items	Array of items in room.
+ * @property {Object.<Direction, Room[]>}	rooms	Rooms arranged by directions of current room.
  * @since 1.0.0
  */
 class Room {
@@ -12,9 +13,9 @@ class Room {
 	/**
 	 * Construction for Room.
 	 *
-	 * @param {number} size	Size of room in percents.
+	 * @param {number} [size = 1]	Size of room in percents.
 	 */
-	constructor(size) {
+	constructor(size = 1) {
 		this.size = size;
 		this.items = [];
 
@@ -30,6 +31,10 @@ class Room {
 	addItem(item) {
 		this.items.push(item);
 		item.place(this);
+	}
+
+	removeItem(item) {
+		this.items.splice(this.items.indexOf(item), 1);
 	}
 
 	/**
@@ -51,7 +56,7 @@ class Room {
 			this.rooms[direction] = [];
 		}
 
-		if (this.rooms[direction].length >= Door.MAX_NUMBER) {
+		if (this.rooms[direction].length >= DoorConstants.MAX_NUMBER) {
 			Logger.error("Too many doors in direction", direction);
 		}
 
@@ -73,8 +78,8 @@ class Room {
 			var doors = this.rooms[direction];
 			var segmentLength = size / doors.length;
 
-			var doorLength = Door.LENGTH * size;
-			var doorThickness = Door.THICKNESS * size;
+			var doorLength = DoorConstants.LENGTH * size;
+			var doorThickness = DoorConstants.THICKNESS * size;
 
 			for (var i = 0; i < doors.length; i++) {
 				var centerOfSegment = (i * segmentLength) + (segmentLength / 2);
@@ -122,11 +127,12 @@ class Room {
 
 		// Draw all items in room
 		this.items.forEach(function(item) {
-			item.update(this.currentRoom);
+			item.update(this);
 			item.draw(context, roomSize);
 		}.bind(this));
 
 		// Remove translation
 		context.translate(-left, -top);
 	}
+
 }

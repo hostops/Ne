@@ -17,8 +17,10 @@ var mainRoom;
  * Creates new game in body of document.
  */
 document.addEventListener("DOMContentLoaded", function() { 
+	mainPlayer = Items.player();
 	mainGame = new Game(document.body);
 	mainRoom = mainGame.currentRoom;
+	mainRoom.addItem(mainPlayer);
 	window.requestAnimationFrame(mainGame.update.bind(mainGame));
 	start();
 }, false);

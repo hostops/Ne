@@ -50,8 +50,8 @@ class Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	place(room) {
-		this.x = Math.random();
-		this.y = Math.random();
+		this.x = Math.random() * (1 - this.width);
+		this.y = Math.random() * (1 - this.height);
 	}
 	
 	/**

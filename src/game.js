@@ -24,14 +24,17 @@ const Direction = Object.freeze({
 	}
 });
 
-const Door = Object.freeze({
+/**
+ * Object for 'constants' about door. We do not freeze this object, because we allow user to set his own constants. 
+ */
+const DoorConstants = {
 	/** Length of doors in percents */
 	LENGTH: 0.1,
 	/** Thickness of doors in percents */
 	THICKNESS: 0.01,
 	/** Maximum number of doors that can be placed in one room */
 	MAX_NUMBER: 4
-});
+};
 
 /**
  * Main game object that controlls user, gameplay, rooms.
@@ -50,6 +53,10 @@ class Game {
 	 * @param {Object} container Dom object where canvas should be placed. 
 	 */
 	constructor(container) {
+		//HACK: Firefox min-body height depends on its content
+		document.body.style.minHeight = "100vh";
+		document.body.style.height = "100vh";
+
 		this.container = container;
 		this.canvas = document.createElement("canvas");
 		container.appendChild(this.canvas);

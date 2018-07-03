@@ -67,8 +67,8 @@ class Player extends Item {
 		dy += (direction == Direction.DOWN) / 100;
 		dy -= (direction == Direction.UP) / 100;
 
-		this.x = dx > 0 && dx + this.width < 1 ? dx : this.x;
-		this.y = dy > 0 && dy + this.height < 1 ? dy : this.y;
+		this.x = dx >= 0 && dx + this.width <= 1 ? dx : this.x;
+		this.y = dy >= 0 && dy + this.height <= 1 ? dy : this.y;
 	}
 
 	/**
@@ -78,8 +78,8 @@ class Player extends Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	place(room) {
-		this.x = Math.random();
-		this.y = Math.random();
+		this.x = Math.random() * (1 - this.width);
+		this.y = Math.random() * (1 - this.height);
 	}
 	
 	/**
@@ -90,6 +90,38 @@ class Player extends Item {
 	 */
 	update(room) {
 		this.moveUser(this.direction);
+
+		// Check doors. 
+		var xCenter = (this.x + this.width / 2);
+		var yCenter = (this.y + this.height / 2);
+		var directions = Object.keys(room.rooms);
+		directions.forEach(function(direction) {
+			var doors = room.rooms[direction];
+			var segmentLength = 1 / doors.length;
+
+			for (var i = 0; i < doors.length; i++) {
+				var center = (i * segmentLength) + (segmentLength / 2)  - DoorConstants.LENGTH / 2;
+
+				var xInDoors = center < xCenter && xCenter < center + DoorConstants.LENGTH;
+				var yInDoors =  center < yCenter && yCenter < center + DoorConstants.LENGTH;
+
+				if (direction == Direction.UP) {
+					yInDoors = this.y < DoorConstants.THICKNESS;
+				} else if (direction == Direction.Down) {
+					yInDoors = this.y + this.height > 1 - DoorConstants.THICKNESS;
+				} else if (direction == Direction.RIGHT) {
+					xInDoors = this.x + this.width > 1 - DoorConstants.THICKNESS;
+				} else if (direction == Direction.LEFT) {
+					xInDoors = this.x < DoorConstants.THICKNESS;
+				}
+
+				if (xInDoors && yInDoors) {
+					mainGame.currentRoom.removeItem(this);
+					mainGame.currentRoom = doors[i];
+					mainGame.currentRoom.addItem(this);
+				}
+			}
+		}.bind(this));
 	}
 	
 	
