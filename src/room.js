@@ -128,7 +128,7 @@ class Room {
 		// Draw all items in room
 		this.items.forEach(function(item) {
 			item.update(this);
-			item.draw(context, roomSize);
+			item.draw(context, width < height ? widht : height);
 		}.bind(this));
 
 		// Remove translation

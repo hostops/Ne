@@ -57,8 +57,9 @@ class Player extends Item {
 	/** 
 	 * Moves user in specified direction.
 	 * @param {Direction} direction Direction to move to.
+	 * @param {Room} room Room where item is located.
 	 */
-	moveUser(direction) {
+	moveUser(direction, room) {
 		var dx = this.x;
 		var dy = this.y;
 
@@ -67,8 +68,8 @@ class Player extends Item {
 		dy += (direction == Direction.DOWN) / 100;
 		dy -= (direction == Direction.UP) / 100;
 
-		this.x = dx >= 0 && dx + this.width <= 1 ? dx : this.x;
-		this.y = dy >= 0 && dy + this.height <= 1 ? dy : this.y;
+		this.x = dx >= 0 && dx + this.width <= room.size ? dx : this.x;
+		this.y = dy >= 0 && dy + this.height <= room.size ? dy : this.y;
 	}
 
 	/**
@@ -78,8 +79,7 @@ class Player extends Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	place(room) {
-		this.x = Math.random() * (1 - this.width);
-		this.y = Math.random() * (1 - this.height);
+		super.place(room);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ class Player extends Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	update(room) {
-		this.moveUser(this.direction);
+		this.moveUser(this.direction, room);
 
 		// Check doors. 
 		var xCenter = (this.x + this.width / 2);
@@ -102,15 +102,15 @@ class Player extends Item {
 			for (var i = 0; i < doors.length; i++) {
 				var center = (i * segmentLength) + (segmentLength / 2)  - DoorConstants.LENGTH / 2;
 
-				var xInDoors = center < xCenter && xCenter < center + DoorConstants.LENGTH;
-				var yInDoors =  center < yCenter && yCenter < center + DoorConstants.LENGTH;
+				var xInDoors = center * room.size < xCenter && xCenter < (center + DoorConstants.LENGTH) * room.size;
+				var yInDoors =  center * room.size < yCenter && yCenter < (center + DoorConstants.LENGTH) * room.size;
 
 				if (direction == Direction.UP) {
 					yInDoors = this.y < DoorConstants.THICKNESS;
 				} else if (direction == Direction.Down) {
-					yInDoors = this.y + this.height > 1 - DoorConstants.THICKNESS;
+					yInDoors = this.y + this.height > room.size - DoorConstants.THICKNESS;
 				} else if (direction == Direction.RIGHT) {
-					xInDoors = this.x + this.width > 1 - DoorConstants.THICKNESS;
+					xInDoors = this.x + this.width > room.size - DoorConstants.THICKNESS;
 				} else if (direction == Direction.LEFT) {
 					xInDoors = this.x < DoorConstants.THICKNESS;
 				}

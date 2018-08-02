@@ -12,7 +12,7 @@ class Items {
 	 * @param {number} [height = 10]	Height of player in percents (form 0 % to 100 %).
 	 * @returns {Player} Instance of player.
 	 */
-	static player(width = 10, height = 10) {
+	static player(width = 5, height = 5) {
 		return new Player(width / 100, height / 100);
 	}
 

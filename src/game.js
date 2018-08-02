@@ -38,9 +38,7 @@ const DoorConstants = {
 
 /**
  * Main game object that controlls user, gameplay, rooms.
- *
- * @property {number} width       Width of canvas in percents.
- * @property {number} height      Height of canvas in percents.
+ * 
  * @property {Room}   currentRoom Object of current displayed room.
  * @property {Object} canvas      Canvas where game is drawn.
  * @since 1.0.0
