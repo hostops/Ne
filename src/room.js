@@ -45,24 +45,32 @@ class Room {
 	 * @param {function} checkFunction	Function that checks if player can move in room.
 	 */
 	addRoom(room, direction, checkFunction) {
-		// If the rooms are already connected, exit the loop
-		var inverseDirection = Direction.inverse(direction);
-		if (inverseDirection in room.rooms && room.rooms[inverseDirection].indexOf(this) != -1) {
+		var inversedDirection = Direction.inverse(direction);
+		// Exit if the rooms are already connected.
+		if (direction in this.rooms && this.rooms[direction].indexOf(room) != -1) {
+			Logger.info("Room already added.", room);
 			return;
 		}
 
-		// If the direction is not already in this.rooms, insert new empty array
+		// If the direction or inversedDirection is not already in rooms, insert new empty array
 		if (!(direction in this.rooms)) {
 			this.rooms[direction] = [];
 		}
+		if (!(inversedDirection in room.rooms)) {
+			room.rooms[inversedDirection] = [];
+		}
 
 		if (this.rooms[direction].length >= DoorConstants.MAX_NUMBER) {
-			Logger.error("Too many doors in direction", direction);
+			Logger.info("Too many doors in direction", direction);
+		}
+		if (room.rooms[inversedDirection].length >= DoorConstants.MAX_NUMBER) {
+			Logger.info("Too many doors in direction", inversedDirection);
 		}
 
 		// Add room to array and add link to this room to other room too
 		this.rooms[direction].push(room);
-		room.addRoom(this, inverseDirection);
+		room.rooms[inversedDirection].push(this);
+		
 	}
 
 	/**

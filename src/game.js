@@ -3,17 +3,16 @@
  * @enum {number}
  */
 const Direction = Object.freeze({
-	/** The entity is not moving */
-	NOWHERE: 0,
 	/** Direction left. */
-	LEFT: 1,
+	LEFT: 0,
 	/** Direction up. */
-	UP:	2,
+	UP:	1,
 	/** Direction right. */
-	RIGHT: 3,
+	RIGHT: 2,
 	/** Direction down. */
-	DOWN: 4,
-
+	DOWN: 3,
+	/** The entity is not moving */
+	NOWHERE: 4,
 	/**
 	 * Get inverse direction of given direction
 	 *

@@ -60,16 +60,14 @@ class Player extends Item {
 	 * @param {Room} room Room where item is located.
 	 */
 	moveUser(direction, room) {
-		var dx = this.x;
-		var dy = this.y;
+		this.x -= (direction == Direction.LEFT) / 100;
+		this.x += (direction == Direction.RIGHT) / 100;
+		this.y += (direction == Direction.DOWN) / 100;
+		this.y -= (direction == Direction.UP) / 100;
 
-		dx -= (direction == Direction.LEFT) / 100;
-		dx += (direction == Direction.RIGHT) / 100;
-		dy += (direction == Direction.DOWN) / 100;
-		dy -= (direction == Direction.UP) / 100;
-
-		this.x = dx >= 0 && dx + this.width <= room.size ? dx : this.x;
-		this.y = dy >= 0 && dy + this.height <= room.size ? dy : this.y;
+		// Limit with border of item.
+		this.x = Math.min(room.size - this.width, Math.max(0, this.x));
+		this.y = Math.min(room.size - this.height, Math.max(0, this.y));
 	}
 
 	/**
@@ -107,8 +105,9 @@ class Player extends Item {
 
 				if (direction == Direction.UP) {
 					yInDoors = this.y < DoorConstants.THICKNESS;
-				} else if (direction == Direction.Down) {
+				} else if (direction == Direction.DOWN) {
 					yInDoors = this.y + this.height > room.size - DoorConstants.THICKNESS;
+					console.log("x: "+xInDoors + ", y: "+ yInDoors);
 				} else if (direction == Direction.RIGHT) {
 					xInDoors = this.x + this.width > room.size - DoorConstants.THICKNESS;
 				} else if (direction == Direction.LEFT) {
@@ -117,7 +116,7 @@ class Player extends Item {
 
 				if (xInDoors && yInDoors) {
 					mainGame.currentRoom.removeItem(this);
-					mainGame.currentRoom = doors[i];
+					mainGame.changeCurrentRoom(doors[i]);
 					mainGame.currentRoom.addItem(this);
 				}
 			}

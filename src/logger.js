@@ -12,7 +12,7 @@ class Logger {
 	 * @param {Array} args	Arguments to log to console
 	 */
 	static log(...args) {
-		console.log("[LOG] " + args.join(" "));
+		console.log("[LOG] " + args.join(": "));
 	}
 
 	/**
@@ -21,7 +21,7 @@ class Logger {
 	 * @param {Array} args	Arguments to log to console
 	 */
 	static error(...args) {
-		console.log("[ERROR] " + args.join(" "));
+		console.error("[ERROR] " + args.join(": "));
 	}
 
 	/**
@@ -30,7 +30,7 @@ class Logger {
 	 * @param {Array} args	Arguments to log to console
 	 */
 	static debug(...args) {
-		console.log("[DEBUG] " + args.join(" "));
+		console.debug("[DEBUG] " + args.join(": "));
 	}
 
 	/**
@@ -39,7 +39,7 @@ class Logger {
 	 * @param {Array} args	Arguments to log to console
 	 */
 	static info(...args) {
-		console.log("[INFO] " + args.join(" "));
+		console.info("[INFO] " + args.join(": "));
 	}
 
 	/**
@@ -48,7 +48,7 @@ class Logger {
 	 * @param {Array} args	Arguments to log to console
 	 */
 	static warn(...args) {
-		console.log("[WARNING] " + args.join(" "));
+		console.warn("[WARNING] " + args.join(": "));
 	}
 
 }
