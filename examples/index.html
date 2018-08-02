@@ -6,9 +6,16 @@
 </style>
 <script src="../ne.js"></script>
 <script>
-	function start() {
-		mainRoom.addItem(new Item(0.1, 0.1));		
-		mainRoom.newLeftRoom(50);
-		mainRoom.newUpRoom(100);	
+	function start() {		
+		var leftRoom = mainRoom.newLeftRoom(80);
+		var upRoom = mainRoom.newUpRoom(60);
+		var thirdRoom = leftRoom.newUpRoom(40);
+		thirdRoom.addRoom(upRoom, Direction.RIGHT);	
+		mainRoom.addItem(new Item(0.05, 0.05));
+		mainRoom.addItem(new Item(0.05, 0.05));
+		mainRoom.addItem(new Item(0.05, 0.05));
+		leftRoom.addItem(new Item(0.05, 0.05));
+		leftRoom.addItem(new Item(0.05, 0.05));
+		thirdRoom.addItem(new Item(0.05, 0.05));
 	}
 </script>

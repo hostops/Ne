@@ -68,7 +68,7 @@ class Game {
 		}.bind(this);
 
 		// Add main room
-		this.currentRoom = new Room(0.4);
+		this.currentRoom = new Room(1);
 	}
 
 	/**

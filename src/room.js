@@ -42,7 +42,7 @@ class Room {
 	 * The room is placed in this.rooms object
 	 * @param {Room} room				The room we want to connect to this room.
 	 * @param {Direction} direction		The direction where we want to place the room.
-	 * @param {function} checkFunction	Function that checks if player can move in room.
+	 * @param {function} [checkFunction]	Function that checks if player can move in room.
 	 */
 	addRoom(room, direction, checkFunction) {
 		var inversedDirection = Direction.inverse(direction);
