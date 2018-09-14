@@ -1,5 +1,13 @@
 # Ne
-A library that helps you simply create arcade game using few lines. Purpose of project Ne is to make children interested in coding.
+![GitHub](https://img.shields.io/github/license/jakobhostnik/ne.svg?i)
+![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)  
+A library that helps you simply create arcade game using few lines. Purpose of project Ne is to make children interested in coding.  
+
+[![GitHub issues](https://img.shields.io/github/issues/jakobhostnik/ne.svg)](https://github.com/jakobhostnik/ne/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/jakobhostnik/ne.svg)
+[![GitHub forks](https://img.shields.io/github/forks/jakobhostnik/ne.svg)](https://github.com/jakobhostnik/ne/network)
+[![GitHub stars](https://img.shields.io/github/stars/jakobhostnik/ne.svg)](https://github.com/jakobhostnik/ne/stargazers)  
+
 
 ## Simple example
 ```javascript
