@@ -42,9 +42,12 @@ class RestartGameButton extends Item {
     update(room) {
         if (room.items.indexOf(mainPlayer) != -1) {
             if (this.x < mainPlayer.x + mainPlayer.width / 2 && mainPlayer.x + mainPlayer.width / 2 < this.x + this.width &&
-                this.y < mainPlayer.y + mainPlayer.height / 2 && mainPlayer.x + mainPlayer.height / 2 < this.y + height) {
-                window.removeEventListener("keydown");
-                window.removeEventListener("keyup");
+                this.y < mainPlayer.y + mainPlayer.height / 2 && mainPlayer.x + mainPlayer.height / 2 < this.y + this.height) {
+                // Remove old game.
+                window.removeEventListener("keydown", mainPlayer.startUserAction);
+                window.removeEventListener("keyup", mainPlayer.endUserAction);
+                document.body.removeChild(document.querySelector("canvas"));
+                // Start new game.
                 startNewGame();
             }
         }
