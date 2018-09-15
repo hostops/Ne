@@ -1,0 +1,16 @@
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+</style>
+<script src="../ne.js"></script>
+<script>
+	function start() {		
+		var leftRoom = mainRoom.newLeftRoom(80);
+		var upRoom = mainRoom.newUpRoom(60);
+		var thirdRoom = leftRoom.newUpRoom(40);
+		thirdRoom.addRoom(upRoom, Direction.RIGHT);	
+		thirdRoom.addRoom(Rooms.gameOverRoom(50), Direction.RIGHT);
+	}
+</script>

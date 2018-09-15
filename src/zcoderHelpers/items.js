@@ -6,7 +6,7 @@
 class Items {
 	
 	/**
-	 * Creates instance of player.
+	 * Creates instance of type player.
 	 * 
 	 * @param {number} [width = 10]	Width of player in percents (form 0 % to 100 %).
 	 * @param {number} [height = 10]	Height of player in percents (form 0 % to 100 %).
@@ -17,7 +17,7 @@ class Items {
 	}
 
 	/**
-	 * Creates instance of AngryRobot.
+	 * Creates instance of type AngryRobot.
 	 * 
 	 * @returns {AngryRobot} Instance of AngryRobot.
 	 */
@@ -26,7 +26,7 @@ class Items {
 	}
 	
 	/**
-	 * Creates instance of Helper.
+	 * Creates instance of type Helper.
 	 *
 	 * @returns {Helper} Instance of Helper.
 	 */
@@ -35,11 +35,21 @@ class Items {
 	}
 	
 	/**
-	 * Creates instance of Bonus.
+	 * Creates instance of type Bonus.
 	 *
 	 * @returns {Bonus} Instance of Bonus.
 	 */
 	static bonus() {
 		return new Bonus();
+	}
+
+	/**
+	 * Creates instance of RestartGameButton.
+	 * @param {number} [width = 10]	Width of button in percents (form 0 % to 100 %).
+	 * @param {number} [height = 10] Height of button in percents (form 0 % to 100 %).
+	 * @returns {Bonus} Instance of RestartGameButton.
+	 */
+	static restartGameButton(width = 10, height = 5) {
+		return new RestartGameButton(width / 100, height / 100);
 	}
 }

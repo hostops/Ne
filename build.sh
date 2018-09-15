@@ -1,1 +1,1 @@
-cat src/*/* > ../ne.js
+cat src/*/* > ne.js
