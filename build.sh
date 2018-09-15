@@ -1,2 +1,1 @@
-cd src
-cat $(ls) > ../ne.js
+cat src/*/* > ../ne.js
