@@ -38,8 +38,9 @@ const DoorConstants = {
 /**
  * Main game object that controlls user, gameplay, rooms.
  * 
- * @property {Room}   currentRoom Object of current displayed room.
- * @property {Object} canvas      Canvas where game is drawn.
+ * @property {Room}	currentRoom Object of current displayed room.
+ * @property {Room} lastRoom For purpose of changing room this holds last doors.
+ * @property {Object} canvas Canvas where game is drawn.
  * @since 1.0.0
  */
 class Game {
@@ -86,6 +87,7 @@ class Game {
 	 * @param {Room} room New room to be shown.
 	 */
 	changeCurrentRoom(room) {
+		this.lastRoom = this.currentRoom;
 		this.currentRoom = room;
 	}
 	
