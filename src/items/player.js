@@ -7,6 +7,7 @@
  * @property {number} y      		Y coordinate of item in percents.
  * @property {Moving} moving 		Moving type of item.
  * @property {Direction} direction	Current direction of moving.
+ * @extends {Item}
  * @since 1.0.0
  */
 class Player extends Item {

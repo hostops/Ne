@@ -14,7 +14,9 @@ const Moving = Object.freeze({
 	/** Following the user. */
 	FOLLOWING: 4,
 	/** Hiding from user, to be hard to catch. */
-	HIDING: 5
+	HIDING: 5,
+	/**  Item is not moving. */
+	FIXED: 6
 });
 
 /**
