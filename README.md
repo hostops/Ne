@@ -1,12 +1,12 @@
 # Ne
-![GitHub](https://img.shields.io/github/license/jakobhostnik/ne.svg?i)
+![GitHub](https://img.shields.io/github/license/etilk/ne.svg)
 ![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)  
 A library that helps you simply create arcade game using few lines. Purpose of project Ne is to make children interested in coding.  
 
-[![GitHub issues](https://img.shields.io/github/issues/jakobhostnik/ne.svg)](https://github.com/jakobhostnik/ne/issues)
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/jakobhostnik/ne.svg)
-[![GitHub forks](https://img.shields.io/github/forks/jakobhostnik/ne.svg)](https://github.com/jakobhostnik/ne/network)
-[![GitHub stars](https://img.shields.io/github/stars/jakobhostnik/ne.svg)](https://github.com/jakobhostnik/ne/stargazers)  
+[![GitHub issues](https://img.shields.io/github/issues/etilk/ne.svg)](https://github.com/etilk/ne/issues)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/etilk/ne.svg)
+[![GitHub forks](https://img.shields.io/github/forks/etilk/ne.svg)](https://github.com/etilk/ne/network)
+[![GitHub stars](https://img.shields.io/github/stars/etilk/ne.svg)](https://github.com/etilk/ne/stargazers)  
 
 
 ## Simple example
