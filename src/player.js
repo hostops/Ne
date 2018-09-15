@@ -1,11 +1,12 @@
 /**
  * Class for main character. This type of item is moving by user input (keyboard arrows).
  *
- * @property {number} width  Width of item in percents.
- * @property {number} height Height of item in percents.
- * @property {number} x      X coordinate of item in percents.
- * @property {number} y      Y coordinate of item in percents.
- * @property {Moving} moving Moving type of item.
+ * @property {number} width  		Width of item in percents.
+ * @property {number} height 		Height of item in percents.
+ * @property {number} x      		X coordinate of item in percents.
+ * @property {number} y      		Y coordinate of item in percents.
+ * @property {Moving} moving 		Moving type of item.
+ * @property {Direction} direction	Current direction of moving.
  * @since 1.0.0
  */
 class Player extends Item {
@@ -22,7 +23,7 @@ class Player extends Item {
 
 		// Direction in which the player is moving
 		this.direction = Direction.NOWHERE;
-
+		this.lastRoom = null;
 		// Event listeners for key 
 		window.addEventListener("keydown", this.startUserAction.bind(this));
 		window.addEventListener("keyup", this.endUserAction.bind(this));
@@ -72,12 +73,39 @@ class Player extends Item {
 
 	/**
 	 * Places item in room.  It is called when we place
-	 * item in room before first update call.
+	 * item in room before first update call. Item is placed in new room
 	 *
 	 * @param {Room} room Room where item is located.
 	 */
 	place(room) {
-		super.place(room);
+		if (mainGame.lastRoom == null) {
+			super.place(room);
+			return;
+		}
+		// Find doors of last room in new room.
+		Object.keys(room.rooms).forEach(function(direction) {
+			for (var i = 0; i < room.rooms[direction].length; i++) {
+				if (room.rooms[direction][i] == mainGame.lastRoom){
+					// Place it at the right position if user changes room
+					var doorsCenter = room.getDoorsCenter(direction, i);
+					if (direction == Direction.LEFT) {
+						this.x = (DoorConstants.THICKNESS) * (room.size) + 0.01;
+						this.y = doorsCenter * room.size; 
+					} else if (direction == Direction.UP) {
+						this.y = (DoorConstants.THICKNESS) * (room.size) + 0.01;
+						this.x = doorsCenter * room.size; 
+					} else if (direction == Direction.RIGHT) {
+						this.x = (1 - DoorConstants.THICKNESS) * (room.size - this.width) - 0.01;
+						this.y = doorsCenter * room.size; 
+					} else if (direction == Direction.DOWN) {
+						this.y = (1 - DoorConstants.THICKNESS) * (room.size - this.height) - 0.01;
+						this.x = doorsCenter * room.size; 
+					}  
+					return;
+				}
+			}
+		}.bind(this));
+		
 	}
 	
 	/**
@@ -95,10 +123,8 @@ class Player extends Item {
 		var directions = Object.keys(room.rooms);
 		directions.forEach(function(direction) {
 			var doors = room.rooms[direction];
-			var segmentLength = 1 / doors.length;
-
 			for (var i = 0; i < doors.length; i++) {
-				var center = (i * segmentLength) + (segmentLength / 2)  - DoorConstants.LENGTH / 2;
+				var center = room.getDoorsCenter(direction, i);
 
 				var xInDoors = center * room.size < xCenter && xCenter < (center + DoorConstants.LENGTH) * room.size;
 				var yInDoors =  center * room.size < yCenter && yCenter < (center + DoorConstants.LENGTH) * room.size;
@@ -107,7 +133,6 @@ class Player extends Item {
 					yInDoors = this.y < DoorConstants.THICKNESS;
 				} else if (direction == Direction.DOWN) {
 					yInDoors = this.y + this.height > room.size - DoorConstants.THICKNESS;
-					console.log("x: "+xInDoors + ", y: "+ yInDoors);
 				} else if (direction == Direction.RIGHT) {
 					xInDoors = this.x + this.width > room.size - DoorConstants.THICKNESS;
 				} else if (direction == Direction.LEFT) {
@@ -115,8 +140,10 @@ class Player extends Item {
 				}
 
 				if (xInDoors && yInDoors) {
+					// Change room
 					mainGame.currentRoom.removeItem(this);
 					mainGame.changeCurrentRoom(doors[i]);
+					
 					mainGame.currentRoom.addItem(this);
 				}
 			}

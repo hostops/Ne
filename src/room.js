@@ -33,6 +33,10 @@ class Room {
 		item.place(this);
 	}
 
+	/**
+	 * Removes item from room.
+	 * @param {Item} item Item to be removed. 
+	 */
 	removeItem(item) {
 		this.items.splice(this.items.indexOf(item), 1);
 	}
@@ -108,6 +112,16 @@ class Room {
 				context.fillRect(x, y, doorWidth, doorHeight);
 			}
 		}.bind(this));
+	}
+
+	/**
+	 * Returns center of the doors in specified direction and doors offset. 
+	 * @param {Direction} direction 
+	 * @param {Position} position 
+	 */
+	getDoorsCenter(direction, position) {
+		var segmentLength = 1 / this.rooms[direction].length;
+		return (position * segmentLength) + (segmentLength / 2)  - DoorConstants.LENGTH / 2
 	}
 
 	/**
