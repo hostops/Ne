@@ -7,17 +7,7 @@
  * @extends {Room}
  * @since 1.0.0
  */
-class GameOverRoom extends Room {
-	
-	/**
-	 * Construction for Room.
-	 *
-	 * @param {number} [size = 1]	Size of room in percents.
-	 */
-	constructor(size = 1) {
-		super(size);
-		this.addItem(Items.restartGameButton());
-	}
+class FinalRoom extends Room {
 
 	/**
 	 * Adds new item object in room. It places it in this.items array. When player is added there are removed all doors.
@@ -38,7 +28,6 @@ class GameOverRoom extends Room {
 	 * @param {number} height	Height of the canvas in pixels
 	 */
 	draw(context, width, height) {
-		this.rooms = {}; // There is no escape from this room. 
 		// Calculate room width
 		var roomSize = Math.min(width, height) * this.size;
 		
@@ -61,10 +50,12 @@ class GameOverRoom extends Room {
 			item.draw(context, width < height ? widht : height);
 		}.bind(this));
 
-		context.font = "30px Tahoma";
-		context.fillStyle="#800";
+		
+		context.fillStyle="#080";
 		context.textAlign = 'center';
-		context.fillText("GAME OVER!", roomSize/2, roomSize/2); 
+		context.font = "20px Tahoma";
+		context.fillText("Congratulations!", roomSize/2, roomSize/2); 
+		context.fillText("You finished the game!", roomSize/2, roomSize/2+30); 
 		context.fillStyle="#000";
 
 		// Remove translation
