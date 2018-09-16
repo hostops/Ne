@@ -14,6 +14,7 @@ class Rooms {
     static room(size = 100){
         return new Room(size/100);
     }
+
     /**
      * Creates new game over room.
      * 
@@ -22,6 +23,16 @@ class Rooms {
      */
     static gameOverRoom(size = 100) {
         return new GameOverRoom(size/100);
+    }
+
+        /**
+     * Creates new final room.
+     * 
+     * @param {number} [size = 100] Size of final room in percents. 
+     * @returns New instance of FinalRoom.
+     */
+    static finalRoom(size = 100) {
+        return new FinalRoom(size/100);
     }
 }
 
