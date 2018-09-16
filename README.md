@@ -8,7 +8,7 @@ A library that helps you simply create arcade game using few lines. Purpose of p
 [![GitHub forks](https://img.shields.io/github/forks/etilk/ne.svg)](https://github.com/etilk/ne/network)
 [![GitHub stars](https://img.shields.io/github/stars/etilk/ne.svg)](https://github.com/etilk/ne/stargazers)  
 
-
+You can try your code online: https://ne.etilk.com/
 ## Simple example
 ```javascript
 var nextRoom = new Room();
